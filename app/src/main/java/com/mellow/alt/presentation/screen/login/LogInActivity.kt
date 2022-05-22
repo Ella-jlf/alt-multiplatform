@@ -48,6 +48,8 @@ class LogInActivity : AppCompatActivity(R.layout.activity_log_in) {
         viewModel.loggedIn.observe(this, {
             if (it) {
                 val intent = SwipeActivity.getIntent(this)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
         })
