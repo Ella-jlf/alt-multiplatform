@@ -1,4 +1,4 @@
-package com.mellow.alt.custom
+package com.mellow.alt.presentation.custom
 
 import android.animation.Animator
 import android.animation.AnimatorSet

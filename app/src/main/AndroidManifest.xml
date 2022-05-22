@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Alt"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".screen.basic.swipe.SwipeActivity"
+            android:name=".presentation.screen.basic.swipe.SwipeActivity"
             android:exported="true">
             <!--            <intent-filter>
                             <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
                         </intent-filter>-->
         </activity>
         <activity
-            android:name=".screen.login.LogInActivity"
+            android:name=".presentation.screen.login.LogInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,8 +1,8 @@
-package com.mellow.alt.net.request
+package com.mellow.alt.data.repository.net.response.user
 
 import com.google.gson.annotations.SerializedName
 
-class UserRequest(
+class UserResponse(
     @SerializedName("id")
     val id: Int?,
     @SerializedName("first_name")
@@ -23,4 +23,9 @@ class UserRequest(
     val longitude: Float?,
     @SerializedName("age")
     val age: Int?
+)
+
+class UserExistsResponse(
+    @SerializedName("user_exists")
+    val userExists: Boolean?
 )

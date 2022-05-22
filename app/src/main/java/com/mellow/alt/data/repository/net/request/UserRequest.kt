@@ -1,31 +1,24 @@
-package com.mellow.alt.net.response.user
+package com.mellow.alt.data.repository.net.request
 
 import com.google.gson.annotations.SerializedName
 
-class UserResponse(
+class UserRequest(
     @SerializedName("id")
     val id: Int?,
     @SerializedName("first_name")
-    val name: String?,
+    val name: String,
     @SerializedName("phone")
-    val phoneNumber: String?,
+    val phoneNumber: String,
     @SerializedName("city_name")
     val city: String?,
-    @SerializedName("photo_list")
-    val imageList: List<String>?,
     @SerializedName("workplace")
     val workPlace: String?,
     @SerializedName("study_place")
     val studyPlace: String?,
     @SerializedName("lat")
-    val latitude: Float?,
+    val latitude: Float,
     @SerializedName("lon")
-    val longitude: Float?,
+    val longitude: Float,
     @SerializedName("age")
-    val age: Int?
-)
-
-class UserExistsResponse(
-    @SerializedName("user_exists")
-    val userExists: Boolean?
+    val age: Int
 )

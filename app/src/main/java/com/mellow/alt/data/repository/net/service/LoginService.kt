@@ -1,13 +1,13 @@
-package com.mellow.alt.net.service
+package com.mellow.alt.data.repository.net.service
 
-import com.mellow.alt.net.request.UserRequest
-import com.mellow.alt.net.response.user.UserExistsResponse
-import com.mellow.alt.net.response.user.UserResponse
+import com.mellow.alt.data.repository.net.request.UserRequest
+import com.mellow.alt.data.repository.net.response.user.UserExistsResponse
+import com.mellow.alt.data.repository.net.response.user.UserResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
-interface UserService {
+interface LoginService {
 
     @FormUrlEncoded
     @POST("/phone/")
@@ -31,5 +31,5 @@ interface UserService {
 
     @FormUrlEncoded
     @POST("/preregister")
-    suspend fun sendUserRegistration(@Body userRequest: UserRequest): ResponseBody
+    suspend fun sendUserRegistration(@Body userRequest: UserRequest): Response<ResponseBody>
 }

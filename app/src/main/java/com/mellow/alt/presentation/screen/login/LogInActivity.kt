@@ -1,4 +1,4 @@
-package com.mellow.alt.screen.login
+package com.mellow.alt.presentation.screen.login
 
 import android.content.Context
 import android.content.Intent
@@ -15,17 +15,15 @@ import com.mellow.alt.R
 import com.mellow.alt.application.App
 import com.mellow.alt.custom.OnLastAddedListener
 import com.mellow.alt.databinding.ActivityLogInBinding
-import com.mellow.alt.net.service.UserService
-import com.mellow.alt.screen.basic.swipe.SwipeActivity
+import com.mellow.alt.data.repository.net.service.LoginService
+import com.mellow.alt.presentation.screen.basic.swipe.SwipeActivity
 import org.kodein.di.instance
 
 class LogInActivity : AppCompatActivity(R.layout.activity_log_in) {
 
-    private val userService by App.di.instance<UserService>()
+    private val userService by App.di.instance<LoginService>()
 
     private val binding by viewBinding(ActivityLogInBinding::bind)
-
-    private var phoneNumber: String = ""
 
     companion object {
         fun getIntent(context: Context) = Intent(context, LogInActivity::class.java)
@@ -39,11 +37,30 @@ class LogInActivity : AppCompatActivity(R.layout.activity_log_in) {
         viewModel = ViewModelProvider(this)[LogInViewModel::class.java]
 
         showPhone()
+
+        initViewModelListeners()
         initCodeListeners()
         initPhoneListeners()
         initRegisterListeners()
     }
 
+    private fun initViewModelListeners() {
+        viewModel.loggedIn.observe(this, {
+            if (it) {
+                val intent = SwipeActivity.getIntent(this)
+                startActivity(intent)
+            }
+        })
+
+
+        viewModel.userExistsLiveData.observe(this, { userExists ->
+            if (userExists) {
+                showCode()
+            } else {
+                showRegistration()
+            }
+        })
+    }
 
     private fun initCodeListeners() {
         binding.inclCode.vChangePhoneNumber.setOnClickListener {
@@ -52,28 +69,18 @@ class LogInActivity : AppCompatActivity(R.layout.activity_log_in) {
 
         binding.inclCode.vCode.setOnLastAddedListener(object : OnLastAddedListener {
             override fun onLastAdded(s: String) {
-                viewModel.sendCodeRegister(s)
+                viewModel.sendCodeLogin(s)
             }
         })
     }
 
     private fun initRegisterListeners() {
-        viewModel.loggedIn.observe(this, {
-            if (it) {
-                val intent = SwipeActivity.getIntent(this)
-                startActivity(intent)
-            }
-        })
+        binding.inclRegistration.vApply.setOnClickListener {
+            viewModel.sendUserLogin()
+        }
     }
 
     private fun initPhoneListeners() {
-        viewModel.userExistsLiveData.observe(this, { userExists ->
-            if (userExists) {
-                showCode()
-            } else {
-                showRegistration()
-            }
-        })
 
         binding.inclPhone.vEtNumber.setOnKeyListener { _, keyCode, _ ->
             if (keyCode == KeyEvent.KEYCODE_DEL) {
@@ -108,7 +115,7 @@ class LogInActivity : AppCompatActivity(R.layout.activity_log_in) {
         }
 
         binding.inclPhone.vBtnSendCode.setOnClickListener {
-            phoneNumber = binding.inclPhone.vTvCountryCode.text.toString() +
+            val phoneNumber = binding.inclPhone.vTvCountryCode.text.toString() +
                     binding.inclPhone.vEtOperatorCode.text.toString() +
                     binding.inclPhone.vEtNumber.text.toString()
 
@@ -116,6 +123,8 @@ class LogInActivity : AppCompatActivity(R.layout.activity_log_in) {
                 binding.inclCode.vTvCodeWasSendOnNumber.text =
                     getString(R.string.code_was_sent, phoneNumber)
             }
+
+            viewModel.sendPhone(phoneNumber)
         }
     }
 

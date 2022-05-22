@@ -1,7 +1,11 @@
 package com.mellow.alt.application
 
 import android.app.Application
-import com.mellow.alt.net.service.UserService
+import com.mellow.alt.data.repository.net.service.LoginService
+import com.mellow.alt.domain.usecase.LoginSendCodeUseCase
+import com.mellow.alt.domain.usecase.RegisterSendCodeUseCase
+import com.mellow.alt.domain.usecase.RegisterSendUserInfoUseCase
+import com.mellow.alt.domain.usecase.SendPhoneUseCase
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.rx.RealmObservableFactory
@@ -50,8 +54,24 @@ class App : Application() {
                 .build()
         }
 
-        bind<UserService>() with singleton {
-            instance<Retrofit>().create(UserService::class.java)
+        bind<LoginService>() with singleton {
+            instance<Retrofit>().create(LoginService::class.java)
+        }
+
+        bind<LoginSendCodeUseCase>() with provider {
+            LoginSendCodeUseCase(instance())
+        }
+
+        bind<RegisterSendCodeUseCase>() with provider {
+            RegisterSendCodeUseCase(instance())
+        }
+
+        bind<RegisterSendUserInfoUseCase>() with provider {
+            RegisterSendUserInfoUseCase(instance())
+        }
+
+        bind<SendPhoneUseCase>() with provider {
+            SendPhoneUseCase(instance())
         }
     }
 

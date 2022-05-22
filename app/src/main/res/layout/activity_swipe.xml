@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.basic.swipe.SwipeActivity">
+    tools:context=".presentation.screen.basic.swipe.SwipeActivity">
 
-    <com.mellow.alt.custom.SwipeView
+    <com.mellow.alt.presentation.custom.SwipeView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

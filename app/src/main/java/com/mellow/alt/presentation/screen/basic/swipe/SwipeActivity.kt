@@ -1,4 +1,4 @@
-package com.mellow.alt.screen.basic.swipe
+package com.mellow.alt.presentation.screen.basic.swipe
 
 import android.content.Context
 import android.content.Intent
