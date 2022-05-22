@@ -4,10 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/GreenYellow"
     tools:context=".presentation.screen.basic.swipe.SwipeActivity">
+
 
     <com.mellow.alt.presentation.custom.SwipeView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.mellow.alt.presentation.custom.SwipeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </FrameLayout>
