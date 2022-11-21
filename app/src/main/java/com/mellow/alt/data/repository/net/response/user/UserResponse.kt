@@ -2,9 +2,9 @@ package com.mellow.alt.data.repository.net.response.user
 
 import com.google.gson.annotations.SerializedName
 
-class UserResponse(
+data class UserResponse(
     @SerializedName("id")
-    val id: Int?,
+    val id: Int? = null,
     @SerializedName("first_name")
     val name: String?,
     @SerializedName("phone")

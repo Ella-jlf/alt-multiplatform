@@ -7,21 +7,19 @@ import android.text.Editable
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.mellow.alt.R
-import com.mellow.alt.application.App
 import com.mellow.alt.custom.OnLastAddedListener
 import com.mellow.alt.databinding.ActivityLogInBinding
-import com.mellow.alt.data.repository.net.service.LoginService
 import com.mellow.alt.presentation.screen.basic.swipe.SwipeActivity
-import org.kodein.di.instance
+import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
-class LogInActivity : AppCompatActivity(R.layout.activity_log_in) {
-
-    private val userService by App.di.instance<LoginService>()
+class LogInActivity : DaggerAppCompatActivity(R.layout.activity_log_in) {
 
     private val binding by viewBinding(ActivityLogInBinding::bind)
 
@@ -29,12 +27,14 @@ class LogInActivity : AppCompatActivity(R.layout.activity_log_in) {
         fun getIntent(context: Context) = Intent(context, LogInActivity::class.java)
     }
 
-    private lateinit var viewModel: LogInViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: LogInViewModel by viewModels {
+        viewModelFactory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this)[LogInViewModel::class.java]
 
         showPhone()
 
@@ -45,23 +45,23 @@ class LogInActivity : AppCompatActivity(R.layout.activity_log_in) {
     }
 
     private fun initViewModelListeners() {
-        viewModel.loggedIn.observe(this, {
+        viewModel.loggedIn.observe(this) {
             if (it) {
                 val intent = SwipeActivity.getIntent(this)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             }
-        })
+        }
 
 
-        viewModel.userExistsLiveData.observe(this, { userExists ->
+        viewModel.userExistsLiveData.observe(this) { userExists ->
             if (userExists) {
                 showCode()
             } else {
                 showRegistration()
             }
-        })
+        }
     }
 
     private fun initCodeListeners() {

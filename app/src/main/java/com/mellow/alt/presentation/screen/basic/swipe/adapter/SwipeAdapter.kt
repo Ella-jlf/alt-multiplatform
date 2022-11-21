@@ -6,6 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mellow.alt.R
 
 class SwipeAdapter : RecyclerView.Adapter<SwipeViewHolder>() {
+
+    companion object {
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SwipeViewHolder {
         return SwipeViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_swipe, parent, false)

@@ -3,6 +3,7 @@ package com.mellow.alt.presentation.screen.login
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.mellow.alt.BuildConfig
 import com.mellow.alt.application.App
 import com.mellow.alt.data.repository.net.request.UserRequest
 import com.mellow.alt.data.repository.net.service.LoginService
@@ -13,12 +14,15 @@ import com.mellow.alt.domain.usecase.SendPhoneUseCase
 import kotlinx.coroutines.*
 import org.kodein.di.instance
 import java.lang.Exception
+import javax.inject.Inject
 
-class LogInViewModel : ViewModel() {
-    private val loginSendCodeUseCase by App.di.instance<LoginSendCodeUseCase>()
-    private val sendPhoneUseCase by App.di.instance<SendPhoneUseCase>()
-    private val registerSendUserInfoUseCase by App.di.instance<RegisterSendUserInfoUseCase>()
-    private val registerSendCodeUseCase by App.di.instance<RegisterSendCodeUseCase>()
+
+class LogInViewModel @Inject constructor(
+    private val loginSendCodeUseCase: LoginSendCodeUseCase,
+    private val sendPhoneUseCase: SendPhoneUseCase,
+    private val registerSendCodeUseCase: RegisterSendCodeUseCase,
+    private val registerSendUserInfoUseCase: RegisterSendUserInfoUseCase
+) : ViewModel() {
 
     private var job: Job? = null
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
@@ -28,13 +32,20 @@ class LogInViewModel : ViewModel() {
     val phoneNumberLiveData = MutableLiveData<String>()
     val userExistsLiveData = MutableLiveData<Boolean>()
     val codeLiveData = MutableLiveData<String>()
-    val loggedIn = MutableLiveData<Boolean>(true)
+    val loggedIn = MutableLiveData<Boolean>(false)
     val latitudeLiveData = MutableLiveData<Float>(53.8964629f)
     val longitudeLiveData = MutableLiveData<Float>(27.5626987f)
 
     fun sendPhone(phone: String) {
         phoneNumberLiveData.value = phone
         CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+            if (phone == BuildConfig.mock_phone) {
+                withContext(Dispatchers.Main) {
+                    userExistsLiveData.value = true
+                    cancel()
+                }
+            }
+
             val result = sendPhoneUseCase.execute(phone)
             if (result.isSuccessful) {
                 val userExists = result.body()?.userExists ?: throw Exception("Null response")
@@ -67,6 +78,13 @@ class LogInViewModel : ViewModel() {
             val phone = phoneNumberLiveData.value ?: throw Exception("Null phone number")
 
             CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+                if (BuildConfig.mock_code == code) {
+                    withContext(Dispatchers.Main) {
+                        loggedIn.value = true
+                        cancel()
+                    }
+                }
+
                 val result = loginSendCodeUseCase.execute(phone, code)
                 if (result.isSuccessful) {
                     val user = result.body()

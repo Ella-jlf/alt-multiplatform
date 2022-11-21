@@ -6,16 +6,24 @@
     android:background="@null"
     android:elevation="2dp">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/vSwipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="40dp"
         android:layout_marginVertical="80dp"
+        android:background="@null"
         android:clickable="true"
         android:elevation="10dp"
         android:focusable="true"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="20dp"
+        app:strokeWidth="2dp">
+
+        <ImageView
+            android:id="@+id/vPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher_foreground" />
 
         <ImageView
             android:id="@+id/vSwipeNopeImage"
@@ -36,6 +44,6 @@
             android:alpha="0"
             android:rotation="-10"
             android:src="@drawable/ic_swipe_yes" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </FrameLayout>

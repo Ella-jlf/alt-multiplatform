@@ -4,13 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/GreenYellow"
     tools:context=".presentation.screen.basic.swipe.SwipeActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/vSwipes"
+    <com.mellow.alt.presentation.custom.SwipeAdapter
+        android:id="@+id/vSwipeController"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/view_swipe" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

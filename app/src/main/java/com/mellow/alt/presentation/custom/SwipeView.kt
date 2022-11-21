@@ -5,6 +5,7 @@ import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Insets
 import android.os.Build
 import android.util.AttributeSet
@@ -15,13 +16,16 @@ import androidx.core.animation.addListener
 import com.mellow.alt.databinding.ViewSwipeBinding
 import com.mellow.alt.presentation.auxililary.dpToPx
 import kotlin.math.abs
-
+import kotlin.random.Random
 
 class SwipeView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defStyle: Int = 0
 ) : FrameLayout(context, attributeSet, defStyle) {
+
+    var onViewTossedOut: (() -> Unit)? = null
+
     private val binding = ViewSwipeBinding.inflate(
         LayoutInflater.from(context), this, true
     )
@@ -257,8 +261,13 @@ class SwipeView @JvmOverloads constructor(
             duration = baseAnimationDuration
             playTogether(translationXAnimator, rotationAnimator)
 
-            addListener({
+            addListener(onEnd = {
+                onViewTossedOut?.invoke()
             })
+
+            binding.root.elevation = -1f
+            binding.vSwipe.isClickable = false
+
 
             start()
         }
