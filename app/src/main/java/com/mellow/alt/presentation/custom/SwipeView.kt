@@ -99,19 +99,6 @@ class SwipeView @JvmOverloads constructor(
             binding.vSwipeNopeImage.alpha = abs(dx / 500)
             binding.vSwipeYesImage.alpha = 0f
         }
-
-    private fun getScreenWidth(): Int {
-        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val windowMetrics: WindowMetrics = windowManager.currentWindowMetrics
-            val insets: Insets = windowMetrics.windowInsets
-                .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
-            windowMetrics.bounds.width() - insets.left - insets.right
-        } else {
-            val displayMetrics = DisplayMetrics()
-            windowManager.defaultDisplay.getMetrics(displayMetrics)
-            displayMetrics.widthPixels
-        }
     }
 
     private fun animateToInitialPosition() {
@@ -245,32 +232,6 @@ class SwipeView @JvmOverloads constructor(
             return true
         }
         return false
-    }
-
-    private fun isContinueMovement(velocity: Float): Boolean {
-        if (abs(velocity) > 2000) {
-            tossViewOutOfScreen(velocity)
-            return true
-        }
-        return false
-    }
-
-    private fun tossViewOutOfScreen(direction: Float) {
-        val translationDx = if (direction > 0) {
-            1000f
-        } else {
-            -1000f
-        }
-
-        ValueAnimator.ofFloat(binding.vSwipe.translationX, translationDx).apply {
-            duration = baseAnimationDuration
-
-            addUpdateListener {
-                binding.vSwipe.translationX = it.animatedValue as Float
-            }
-
-            start()
-        }
     }
 
     private fun tossViewOutOfScreen(direction: Float) {
