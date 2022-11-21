@@ -32,7 +32,7 @@ class LogInViewModel @Inject constructor(
     val phoneNumberLiveData = MutableLiveData<String>()
     val userExistsLiveData = MutableLiveData<Boolean>()
     val codeLiveData = MutableLiveData<String>()
-    val loggedIn = MutableLiveData<Boolean>(false)
+    val loggedIn = MutableLiveData<Boolean>(true)
     val latitudeLiveData = MutableLiveData<Float>(53.8964629f)
     val longitudeLiveData = MutableLiveData<Float>(27.5626987f)
 
