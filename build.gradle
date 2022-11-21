@@ -1,4 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+import com.mellow.alt.buildsrc.Libs
+
 buildscript {
     repositories {
         google()
@@ -9,9 +11,9 @@ buildscript {
         maven { url 'https://maven.google.com' }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.4"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
-        classpath "io.realm:realm-gradle-plugin:10.7.0"
+        classpath Libs.androidGradlePlugin
+        classpath Libs.Kotlin.gradlePlugin
+        classpath Libs.Realm.realmGradlePlugin
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
