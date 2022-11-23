@@ -1,16 +1,16 @@
 package com.mellow.alt.buildsrc
 
 object ConfigData {
-    const val compileSdkVersion = 32
+    const val compileSdkVersion = 33
     const val buildToolsVersion = "30.0.3"
     const val minSdkVersion = 23
-    const val targetSdkVersion = 32
+    const val targetSdkVersion = 33
     const val versionCode = 1
     const val versionName = "naked"
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.3"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.2.2"
 
     object Realm {
         const val realmGradlePlugin = "io.realm:realm-gradle-plugin:10.7.0"
@@ -50,7 +50,7 @@ object Libs {
 
         object Compose {
             const val snapshot = ""
-            const val version = "1.1.0-beta03"
+            const val version = "1.2.0"
 
             const val animation = "androidx.compose.animation:animation:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"

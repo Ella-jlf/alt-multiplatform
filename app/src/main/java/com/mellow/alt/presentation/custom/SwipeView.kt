@@ -129,24 +129,7 @@ class SwipeView @JvmOverloads constructor(
             duration = baseAnimationDuration
             playTogether(translationXAnimator, translationYAnimator, rotationAnimator)
 
-            addListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(p0: Animator?) {
-                    binding.vSwipe.isClickable = false
-                    binding.vSwipe.isFocusable = false
-                }
 
-                override fun onAnimationEnd(p0: Animator?) {
-                    binding.vSwipe.isFocusable = true
-                    binding.vSwipe.isClickable = true
-                }
-
-                override fun onAnimationCancel(p0: Animator?) {
-                }
-
-                override fun onAnimationRepeat(p0: Animator?) {
-                }
-
-            })
 
             start()
         }
