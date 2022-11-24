@@ -1,15 +1,15 @@
 @file:Suppress("OverrideDeprecatedMigration")
 
-package com.mellow.alt.presentation.screen.basic.swipe
+package com.mellow.alt.presentation.screen.navigation
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.material.Text
 import androidx.lifecycle.ViewModelProvider
-import com.mellow.alt.presentation.custom.SwipeCard
+import com.mellow.alt.presentation.compose.AltApp
+import com.mellow.alt.presentation.compose.SwipeCard
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -32,7 +32,7 @@ class SwipeActivity : DaggerAppCompatActivity() {
         viewModel
 
         setContent {
-            SwipeCard()
+            AltApp()
         }
 
     }

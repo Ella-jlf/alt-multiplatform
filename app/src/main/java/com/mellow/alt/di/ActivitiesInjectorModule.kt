@@ -1,6 +1,6 @@
 package com.mellow.alt.di
 
-import com.mellow.alt.presentation.screen.basic.swipe.SwipeActivity
+import com.mellow.alt.presentation.screen.navigation.SwipeActivity
 import com.mellow.alt.presentation.screen.login.LogInActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

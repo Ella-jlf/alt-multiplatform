@@ -2,7 +2,7 @@ package com.mellow.alt.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mellow.alt.presentation.screen.basic.swipe.SwipeViewModel
+import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
 import com.mellow.alt.presentation.screen.login.LogInViewModel
 import com.mellow.alt.utils.ViewModelFactory
 import dagger.Binds

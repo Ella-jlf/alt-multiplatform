@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Alt"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.screen.basic.swipe.SwipeActivity"
+            android:name=".presentation.screen.navigation.SwipeActivity"
             android:exported="true">
             <!--            <intent-filter>
                             <action android:name="android.intent.action.MAIN" />

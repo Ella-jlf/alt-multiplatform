@@ -7,11 +7,10 @@
     <string name="onboarding_description_delete">Мы желаем чтобы Вы получили бла-бла, Анджелину Джоли мы желаем, и вообще нахуй идите</string>
     <string name="app_crashed">App crashed</string>
 
-    <!-- menu -->
-    <string name="menu_my_level">My level</string>
-    <string name="menu_my_orders">My orders</string>
-    <string name="menu_my_preferences">Preferences</string>
-    <string name="menu_my_settings">Settings</string>
+    <!-- navigation -->
+    <string name="nav_swipe">Find</string>
+    <string name="nav_messages">Messages</string>
+    <string name="nav_profile">Profile</string>
 
     <!-- sign in -->
     <string name="send_code_again">Resend code</string>
