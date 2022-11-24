@@ -2,22 +2,41 @@ package com.mellow.alt.presentation.compose
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
+import com.mellow.alt.R
 
 @Composable
-fun SwipeCard() {
+fun SwipeCard(
+    photos: List<String> = listOf(
+        "file:///android_asset/img_temp1.jpg",
+        "file:///android_asset/img_temp.jpg",
+        "file:///android_asset/img_temp1.jpg",
+        "file:///android_asset/img_temp.jpg",
+        "file:///android_asset/img_temp1.jpg",
+        "file:///android_asset/img_temp.jpg"
+    )
+) {
     val translationXRatio: Float = 1 / 3f
     val translationYRatio: Float = 1 / 5f
     val rotationRatio: Float = 1 / 50f
@@ -29,6 +48,8 @@ fun SwipeCard() {
     var rotation by remember { mutableStateOf(0f) }
 
     val velocityTracker = androidx.compose.ui.input.pointer.util.VelocityTracker()
+
+    var mainImage by remember { mutableStateOf(("file:///android_asset/img_temp.jpg")) }
 
     Card(
         modifier = Modifier
@@ -49,8 +70,29 @@ fun SwipeCard() {
                     onDragEnd = {
                         val velocity = velocityTracker.calculateVelocity()
                         velocityTracker.resetTracking()
-                        if (velocity.x > 1000)
+                        if (kotlin.math.abs(velocity.x) > 1000) {
+                            val currentTranslationX = offsetX
+                            if (velocity.x > 0) {
+                                ValueAnimator
+                                    .ofFloat(currentTranslationX, 1000f)
+                                    .apply {
+                                        addUpdateListener {
+                                            offsetX = it.animatedValue as Float
+                                        }
+                                    }
+                                    .start()
+                            } else {
+                                ValueAnimator
+                                    .ofFloat(currentTranslationX, -1000f)
+                                    .apply {
+                                        addUpdateListener {
+                                            offsetX = it.animatedValue as Float
+                                        }
+                                    }
+                                    .start()
+                            }
                             return@detectDragGestures
+                        }
 
                         val currentTranslationX = offsetX
                         val currentTranslationY = offsetY
@@ -103,9 +145,47 @@ fun SwipeCard() {
                 )
             },
         elevation = 10.dp,
-        shape = RoundedCornerShape(24.dp)
-    ) {
+        shape = RoundedCornerShape(24.dp),
 
-        Text(text = "SOSI")
+
+        ) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            Image(
+                painter = rememberAsyncImagePainter(mainImage),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Fit
+            )
+            LazyRow(
+                modifier = Modifier
+                    .padding(24.dp, 16.dp)
+                    .requiredHeight(76.dp)
+                    .clip(RoundedCornerShape(48.dp))
+                    .border(1.dp, Color.Gray, shape = RoundedCornerShape(48.dp))
+                    .padding(6.dp, 0.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                items(photos) { item ->
+                    Image(
+                        painter = rememberAsyncImagePainter(item),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(64.dp)
+                            .clip(RoundedCornerShape(48.dp))
+                            .border(1.dp, Color.Gray, RoundedCornerShape(48.dp))
+                            .clickable {
+                                if (mainImage != item) {
+                                    mainImage = item
+                                }
+                            },
+                        contentScale = ContentScale.Fit
+                    )
+                }
+            }
+        }
     }
 }

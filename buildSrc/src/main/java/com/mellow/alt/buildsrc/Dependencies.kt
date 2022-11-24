@@ -22,7 +22,7 @@ object Libs {
     }
 
     object Kotlin {
-        private const val version = "1.5.31"
+        private const val version = "1.7.20"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
@@ -50,7 +50,7 @@ object Libs {
 
         object Compose {
             const val snapshot = ""
-            const val version = "1.2.0"
+            const val version = "1.3.1"
 
             const val animation = "androidx.compose.animation:animation:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
@@ -85,6 +85,6 @@ object Libs {
     }
 
     object Coil {
-        const val coilCompose = "io.coil-kt:coil-compose:1.3.2"
+        const val coilCompose = "io.coil-kt:coil-compose:2.2.2"
     }
 }
