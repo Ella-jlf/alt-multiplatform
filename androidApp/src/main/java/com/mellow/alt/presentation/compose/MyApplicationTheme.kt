@@ -1,4 +1,4 @@
-package com.mellow.alt.android
+package com.mellow.alt.presentation.compose
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
