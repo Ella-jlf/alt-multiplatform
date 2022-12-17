@@ -102,7 +102,7 @@ dependencies {
     kapt(Libs.Dagger.daggerKapt)
     kapt(Libs.Dagger.daggerSupportKapt)
 
-    implementation(Libs.Retrofit.retrofit)
-    implementation(Libs.Retrofit.retrofitGsonConverter)
-    implementation(Libs.Retrofit.retrofitRxJava)
+    implementation(Libs.Network.retrofit)
+    implementation(Libs.Network.retrofitGsonConverter)
+    implementation(Libs.Network.retrofitRxJava)
 }

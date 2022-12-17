@@ -123,10 +123,25 @@ object Libs {
             "com.google.dagger:dagger-android-processor:$daggerSupportVersion"
     }
 
-    object Retrofit {
+    object Network {
         private const val retrofitVersion = "2.9.0"
         const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
         const val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
         const val retrofitRxJava = "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
+
+        private const val ktorVersion = "1.6.4"
+        const val ktorCore = "io.ktor:ktor-client-core:$ktorVersion"
+        const val ktorSerialization = "io.ktor:ktor-client-serialization:$ktorVersion"
+        const val ktorLogging = "io.ktor:ktor-client-logging:$ktorVersion"
+        const val ktorEngineOkhttp = "io.ktor:ktor-client-okhttp:$ktorVersion"
+
+        private const val okHttpVersion = "4.10.0"
+        const val okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
+
+    }
+
+    object Serialization {
+        private const val serializerVersion = "1.2.2"
+        const val serializer = "org.jetbrains.kotlinx:kotlinx-serialization-json:$serializerVersion"
     }
 }
