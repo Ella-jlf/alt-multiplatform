@@ -15,7 +15,7 @@ fun NavGraphBuilder.buildTabs() {
         LikedScreen()
     }
     composable(NavigationTabs.MESSAGES.route) { from ->
-        Text("sosi2")
+        Chat()
     }
 
     composable(NavigationTabs.PROFILE.route) { from ->

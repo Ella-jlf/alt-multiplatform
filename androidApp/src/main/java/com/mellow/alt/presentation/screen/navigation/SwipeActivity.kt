@@ -9,7 +9,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.mellow.alt.presentation.compose.AltApp
-import com.mellow.alt.presentation.compose.SwipeCard
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
