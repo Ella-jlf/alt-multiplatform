@@ -15,6 +15,7 @@ import com.mellow.alt.R
 import com.mellow.alt.custom.OnLastAddedListener
 import com.mellow.alt.databinding.ActivityLogInBinding
 import com.mellow.alt.presentation.screen.navigation.SwipeActivity
+import com.mellow.alt.presentation.screen.support.SupportActivity
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -41,7 +42,12 @@ class LogInActivity : DaggerAppCompatActivity(R.layout.activity_log_in) {
         initCodeListeners()
         initPhoneListeners()
         initRegisterListeners()
+
+
+        val intent = Intent(this, SupportActivity::class.java)
+        startActivity(intent)
     }
+
 
     private fun initViewModelListeners() {
         viewModel.loggedIn.observe(this) {
@@ -126,6 +132,12 @@ class LogInActivity : DaggerAppCompatActivity(R.layout.activity_log_in) {
             }
 
             viewModel.sendPhone(phoneNumber)
+        }
+
+        binding.inclPhone.SupportButton.setOnClickListener {
+            val intent = Intent(this, SupportActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

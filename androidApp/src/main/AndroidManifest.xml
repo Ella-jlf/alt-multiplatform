@@ -13,14 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Alt"
         android:usesCleartextTraffic="true">
-        <activity
+               <activity
             android:name=".presentation.screen.navigation.SwipeActivity"
             android:exported="true">
-            <!--            <intent-filter>
+
+            <!--
+                            <intent-filter>
                             <action android:name="android.intent.action.MAIN" />
 
                             <category android:name="android.intent.category.LAUNCHER" />
-                        </intent-filter>-->
+                        </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".presentation.screen.login.LogInActivity"
@@ -31,6 +34,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.screen.support.SupportActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

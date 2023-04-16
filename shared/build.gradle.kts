@@ -4,6 +4,7 @@ import com.mellow.alt.buildsrc.Libs
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("org.jetbrains.kotlin.android")
 }
 
 kotlin {
@@ -61,6 +62,9 @@ android {
         minSdk = ConfigDataAndroid.minSdkVersion
         targetSdk = ConfigDataAndroid.targetSdkVersion
     }
+}
+dependencies {
+    implementation("androidx.core:core-ktx:+")
 }
 
 

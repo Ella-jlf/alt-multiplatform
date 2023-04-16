@@ -37,5 +37,7 @@
     <string name="registration_work">Enter your current profession</string>
     <string name="registration_study">Enter your study place</string>
     <string name="registration_apply">Apply</string>
+    <string name="support_buttom">Support</string>
+    <string name="support_text">Your request is being processed</string>
 
 </resources>
