@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Alt"
         android:usesCleartextTraffic="true">
-               <activity
+        <activity
             android:name=".presentation.screen.navigation.SwipeActivity"
             android:exported="true">
 
@@ -36,7 +36,7 @@
         </activity>
         <activity
             android:name=".presentation.screen.support.SupportActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>

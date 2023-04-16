@@ -44,8 +44,8 @@ class LogInActivity : DaggerAppCompatActivity(R.layout.activity_log_in) {
         initRegisterListeners()
 
 
-        val intent = Intent(this, SupportActivity::class.java)
-        startActivity(intent)
+/*        val intent = Intent(this, SupportActivity::class.java)
+        startActivity(intent)*/
     }
 
 
@@ -134,7 +134,7 @@ class LogInActivity : DaggerAppCompatActivity(R.layout.activity_log_in) {
             viewModel.sendPhone(phoneNumber)
         }
 
-        binding.inclPhone.SupportButton.setOnClickListener {
+        binding.inclPhone.vIvSupportButton.setOnClickListener {
             val intent = Intent(this, SupportActivity::class.java)
             startActivity(intent)
             finish()
