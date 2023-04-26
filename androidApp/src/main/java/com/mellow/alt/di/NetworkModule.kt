@@ -1,6 +1,9 @@
 package com.mellow.alt.di
 
 import com.mellow.alt.BuildConfig
+import com.mellow.alt.data.NetworkClient
+import com.mellow.alt.data.RemoteRepository
+import com.mellow.alt.data.RemoteRepositoryImpl
 import com.mellow.alt.data.repository.net.LoginRepositoryImpl
 import com.mellow.alt.data.repository.net.service.LoginService
 import com.mellow.alt.domain.repository.LoginRepository
@@ -17,6 +20,18 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
     private val timeout: Long = 60L
+
+    @Provides
+    @Singleton
+    fun provideNetworkClient(): NetworkClient {
+        return NetworkClient()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteRepository(networkClient: NetworkClient): RemoteRepository {
+        return RemoteRepositoryImpl(networkClient)
+    }
 
     @Singleton
     @Provides

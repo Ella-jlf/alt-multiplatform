@@ -12,6 +12,9 @@ internal fun IosHttpClient() = HttpClient(Ios) {
     }
 }
 
-actual  fun createHttpClient():HttpClient {
+actual fun createHttpClient(): HttpClient {
     return IosHttpClient()
 }
+
+actual val baseUrl: String
+    get() = "127.0.0.1"

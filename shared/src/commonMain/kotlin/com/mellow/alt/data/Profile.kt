@@ -1,5 +1,7 @@
 package com.mellow.alt.data
 
+import kotlinx.serialization.SerialName
+
 @kotlinx.serialization.Serializable
 data class Profile(
     //@SerializedName("id")
@@ -22,4 +24,9 @@ data class Profile(
     val longitude: Float?,
     //@SerializedName("age")
     val age: Int?
+)
+@kotlinx.serialization.Serializable
+data class Nothing(
+    @SerialName("bla")
+    val hyi: String?
 )

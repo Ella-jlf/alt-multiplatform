@@ -4,6 +4,7 @@ import com.mellow.alt.buildsrc.Libs
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -31,7 +32,6 @@ kotlin {
                 implementation(Libs.Network.ktorLogging)
                 implementation(Libs.Network.ktorSerialization)
                 implementation(Libs.Serialization.serializer)
-
                 implementation(Libs.Coroutines.core)
             }
         }

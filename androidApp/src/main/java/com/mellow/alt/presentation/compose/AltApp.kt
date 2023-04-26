@@ -12,9 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
 
 @Composable
-fun AltApp() {
+fun AltApp(viewModel: SwipeViewModel) {
     val tabs = remember { NavigationTabs.values() }
     val navController = rememberNavController()
 
@@ -29,7 +30,7 @@ fun AltApp() {
             navController = navController,
             startDestination = NavigationTabs.SWIPE.route
         ) {
-            buildTabs()
+            buildTabs(viewModel = viewModel)
         }
     }
 }

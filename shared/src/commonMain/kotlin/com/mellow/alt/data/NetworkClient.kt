@@ -1,14 +1,13 @@
 package com.mellow.alt.data
 
 import io.ktor.client.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
 expect fun createHttpClient(): HttpClient
+expect val baseUrl: String
 
 class NetworkClient {
     val httpClient = createHttpClient()
@@ -21,13 +20,13 @@ class NetworkClient {
 
             val json = httpClient.get<String> {
                 url {
-                    protocol = URLProtocol.HTTPS
-                    host = "127.0.0.1"
-                    encodedPath = path
-                    //header("X-Api-Key", NetworkConfig.shared.apiKey)
+                    protocol = URLProtocol.HTTP
+                    host = baseUrl
+                    path(path)
+                    port = 4000
                 }
             }
-            val jsonDecoder = kotlinx.serialization.json.Json { ignoreUnknownKeys = true }
+            val jsonDecoder = Json { ignoreUnknownKeys = true }
             val result = jsonDecoder.decodeFromString<T>(json)
 
             contentResponse.content = result
@@ -39,21 +38,49 @@ class NetworkClient {
     }
 
 
-    suspend inline fun <reified T> getListData(path: String):ContentResponse<List<T>> {
+    suspend inline fun <reified T> getListData(path: String): ContentResponse<List<T>> {
         val contentResponse = ContentResponse<List<T>>()
 
         try {
             val json = httpClient.get<String> {
                 url {
                     protocol = URLProtocol.HTTPS
-                    host = "127.0.0.1"
-                    encodedPath = path
+                    host = baseUrl
+                    path(path)
+                    port = 4000
                     //header("X-Api-Key", NetworkConfig.shared.apiKey)
                 }
             }
-            val jsonDecoder = kotlinx.serialization.json.Json { ignoreUnknownKeys = true }
+            val jsonDecoder = Json { ignoreUnknownKeys = true }
             val result = jsonDecoder.decodeFromString<List<T>>(json)
             contentResponse.content = result
+        } catch (ex: Exception) {
+            val error = ErrorResponse(ex.message.toString())
+            contentResponse.errorResponse = error
+        }
+        return contentResponse
+    }
+
+    suspend inline fun <reified T> postData(
+        path: String,
+        data: String,
+    ): ContentResponse<T> {
+        val contentResponse = ContentResponse<T>()
+        try {
+
+
+            val json = httpClient.post<String> {
+                url {
+                    protocol = URLProtocol.HTTP
+                    host = baseUrl
+                    path(path)
+                    port = 4000
+                }
+
+            }
+            val jsonDecoder = Json { ignoreUnknownKeys = true }
+
+            contentResponse.content = jsonDecoder.decodeFromString<T>(json)
         } catch (ex: Exception) {
             val error = ErrorResponse(ex.message.toString())
             contentResponse.errorResponse = error

@@ -6,8 +6,11 @@ import androidx.compose.material.Text
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.mellow.alt.R
+import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
 
-fun NavGraphBuilder.buildTabs() {
+fun NavGraphBuilder.buildTabs(
+    viewModel: SwipeViewModel
+) {
     composable(NavigationTabs.SWIPE.route) { from ->
         SwipeScreen()
     }
@@ -15,7 +18,7 @@ fun NavGraphBuilder.buildTabs() {
         LikedScreen()
     }
     composable(NavigationTabs.MESSAGES.route) { from ->
-        Chat()
+        Chat(Any(), viewModel = viewModel)
     }
 
     composable(NavigationTabs.PROFILE.route) { from ->

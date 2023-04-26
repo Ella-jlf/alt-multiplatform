@@ -5,6 +5,7 @@ package com.mellow.alt.presentation.screen.navigation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -28,10 +29,8 @@ class SwipeActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel
-
         setContent {
-            AltApp()
+            AltApp(viewModel = viewModel)
         }
 
     }

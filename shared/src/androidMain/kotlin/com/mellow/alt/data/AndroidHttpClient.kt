@@ -14,6 +14,9 @@ internal fun AndroidHttpClient() = HttpClient(OkHttp) {
 }
 
 
-actual fun createHttpClient():HttpClient {
+actual fun createHttpClient(): HttpClient {
     return AndroidHttpClient()
 }
+
+actual val baseUrl: String
+    get() = "192.168.123.6"
