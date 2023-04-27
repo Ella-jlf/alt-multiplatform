@@ -13,20 +13,31 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
+import androidx.core.animation.addListener
 import coil.compose.rememberAsyncImagePainter
+import com.mellow.alt.data.Profile
+import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
+import com.mellow.alt.utils.SwipeCardNum
 
 @Composable
 fun SwipeCard(
-    photos: List<String> = listOf(
+    viewModel: SwipeViewModel,
+    cardNum: SwipeCardNum
+) {
+    val photos: List<String> = listOf(
         "file:///android_asset/img_temp1.jpg",
         "file:///android_asset/img_temp2.jpg",
         "file:///android_asset/img_temp1.jpg",
@@ -34,12 +45,26 @@ fun SwipeCard(
         "file:///android_asset/img_temp2.jpg",
         "file:///android_asset/img_temp.jpg"
     )
-) {
+
+    val toggle by viewModel.toggle.observeAsState()
+    val displayAccount by when (cardNum) {
+        SwipeCardNum.FIRST -> {
+            viewModel.displayAccountFirst.observeAsState()
+        }
+        SwipeCardNum.SECOND -> {
+            viewModel.displayAccountSecond.observeAsState()
+        }
+    }
+
     val translationXRatio: Float = 1 / 3f
     val translationYRatio: Float = 1 / 5f
     val rotationRatio: Float = 1 / 50f
 
     val density = LocalDensity.current
+
+    val configuration = LocalConfiguration.current
+    val screenHeight = configuration.screenHeightDp.dp
+    val screenWidth = configuration.screenWidthDp.dp
 
     var offsetX by remember { mutableStateOf(0f) }
     var offsetY by remember { mutableStateOf(0f) }
@@ -51,6 +76,7 @@ fun SwipeCard(
 
     Card(
         modifier = Modifier
+            .zIndex(if (cardNum == toggle!!) 2f else 1f)
             .offset((offsetX / density.density).dp, (offsetY / density.density).dp)
             .rotate(rotation)
             .fillMaxSize()
@@ -72,20 +98,34 @@ fun SwipeCard(
                             val currentTranslationX = offsetX
                             if (velocity.x > 0) {
                                 ValueAnimator
-                                    .ofFloat(currentTranslationX, 1000f)
+                                    .ofFloat(currentTranslationX, screenWidth.toPx())
                                     .apply {
                                         addUpdateListener {
                                             offsetX = it.animatedValue as Float
                                         }
+                                        addListener(onEnd = {
+                                            viewModel.onSwipeRight(cardNum)
+                                            offsetX = 0f
+                                            offsetY = 0f
+                                            rotation = 0f
+                                        })
                                     }
+
                                     .start()
                             } else {
                                 ValueAnimator
-                                    .ofFloat(currentTranslationX, -1000f)
+                                    .ofFloat(currentTranslationX, -screenWidth.toPx())
                                     .apply {
                                         addUpdateListener {
                                             offsetX = it.animatedValue as Float
                                         }
+                                        addListener(onEnd = {
+                                            viewModel.onSwipeLeft(cardNum)
+
+                                            offsetX = 0f
+                                            offsetY = 0f
+                                            rotation = 0f
+                                        })
                                     }
                                     .start()
                             }
@@ -152,7 +192,7 @@ fun SwipeCard(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Name",
+                text = displayAccount?.name ?: "Empty",
                 modifier = Modifier
                     .weight(1.5f),
 

@@ -58,12 +58,13 @@ object Libs {
             const val layout = "androidx.compose.foundation:foundation-layout:$version"
             const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
             const val material = "androidx.compose.material:material:$version"
-            const val runtime = "androidx.compose.runtime:runtime:$version"
             const val tooling = "androidx.compose.ui:ui-tooling:$version"
             const val ui = "androidx.compose.ui:ui:$version"
             const val uiUtil = "androidx.compose.ui:ui-util:$version"
             const val uiTest = "androidx.compose.ui:ui-test-junit4:$version"
             const val uiTestManifest = "androidx.compose.ui:ui-test-manifest:$version"
+            const val runtime = "androidx.compose.runtime:runtime:$version"
+            const val runtimeLiveData = "androidx.compose.runtime:runtime-livedata:$version"
         }
 
         object ConstraintLayout {

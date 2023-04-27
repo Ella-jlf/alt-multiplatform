@@ -7,24 +7,25 @@ data class Profile(
     //@SerializedName("id")
     val id: Int? = null,
     //@SerializedName("first_name")
-    val name: String?,
+    val name: String? = null,
     //@SerializedName("phone")
-    val phoneNumber: String?,
+    val phoneNumber: String? = null,
     //@SerializedName("city_name")
-    val city: String?,
+    val city: String? = null,
     //@SerializedName("photo_list")
-    val imageList: List<String>?,
+    val imageList: List<String>? = null,
     //@SerializedName("workplace")
-    val workPlace: String?,
+    val workPlace: String? = null,
     //@SerializedName("study_place")
-    val studyPlace: String?,
+    val studyPlace: String? = null,
     //@SerializedName("lat")
-    val latitude: Float?,
+    val latitude: Float? = null,
     //@SerializedName("lon")
-    val longitude: Float?,
+    val longitude: Float? = null,
     //@SerializedName("age")
-    val age: Int?
+    val age: Int? = null,
 )
+
 @kotlinx.serialization.Serializable
 data class Nothing(
     @SerialName("bla")

@@ -12,7 +12,7 @@ fun NavGraphBuilder.buildTabs(
     viewModel: SwipeViewModel
 ) {
     composable(NavigationTabs.SWIPE.route) { from ->
-        SwipeScreen()
+        SwipeScreen(viewModel)
     }
     composable(NavigationTabs.LIKED.route) { from ->
         LikedScreen()
