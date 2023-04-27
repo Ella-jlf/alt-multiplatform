@@ -10,7 +10,6 @@ import com.mellow.alt.utils.SwipeCardNum
 import kotlinx.coroutines.*
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class SwipeViewModel @Inject constructor(private val remoteRepo: RemoteRepository) :
     ViewModel() {
@@ -19,28 +18,31 @@ class SwipeViewModel @Inject constructor(private val remoteRepo: RemoteRepositor
         println("CoroutineExceptionHandler got $exception with suppressed ${exception.suppressed.contentToString()}")
     }
     private val _displayAccounts = MutableLiveData<Queue<Profile>>(LinkedList<Profile>().apply {
-        add(Profile(name="1"))
-        add(Profile(name="2"))
-        add(Profile(name="3"))
-        add(Profile(name="4"))
-        add(Profile(name="5"))
-        add(Profile(name="6"))
-        add(Profile(name="7"))
-        add(Profile(name="8"))
-        add(Profile(name="9"))
-        add(Profile(name="10"))
-        add(Profile(name="11"))
+        add(Profile(name = "1"))
+        add(Profile(name = "2"))
+        add(Profile(name = "3"))
+        add(Profile(name = "4"))
+        add(Profile(name = "5"))
+        add(Profile(name = "6"))
+        add(Profile(name = "7"))
+        add(Profile(name = "8"))
+        add(Profile(name = "9"))
+        add(Profile(name = "10"))
+        add(Profile(name = "11"))
     })
     val displayAccounts: LiveData<Queue<Profile>> = _displayAccounts
 
-    private val _displayAccountFirst = MutableLiveData<Profile>()
-    val displayAccountFirst: LiveData<Profile> = _displayAccountFirst
+    private val _displayProfileFirst = MutableLiveData<Profile>()
+    val displayProfileFirst: LiveData<Profile> = _displayProfileFirst
 
-    private val _displayAccountSecond = MutableLiveData<Profile>()
-    val displayAccountSecond: LiveData<Profile> = _displayAccountSecond
+    private val _displayProfileSecond = MutableLiveData<Profile>()
+    val displayProfileSecond: LiveData<Profile> = _displayProfileSecond
 
     private val _toggle = MutableLiveData<SwipeCardNum>(SwipeCardNum.FIRST)
     val toggle: LiveData<SwipeCardNum> = _toggle
+
+    private val _userProfile = MutableLiveData<Profile>()
+    val userProfile: LiveData<Profile> = _userProfile
 
     fun getProfiles() {
 
@@ -56,10 +58,10 @@ class SwipeViewModel @Inject constructor(private val remoteRepo: RemoteRepositor
     fun onSwipeRight(cardNum: SwipeCardNum) {
         val profile = when (cardNum) {
             SwipeCardNum.FIRST -> {
-                displayAccountFirst.value
+                displayProfileFirst.value
             }
             SwipeCardNum.SECOND -> {
-                displayAccountSecond.value
+                displayProfileSecond.value
             }
         }
 
@@ -71,10 +73,10 @@ class SwipeViewModel @Inject constructor(private val remoteRepo: RemoteRepositor
     fun onSwipeLeft(cardNum: SwipeCardNum) {
         val profile = when (cardNum) {
             SwipeCardNum.FIRST -> {
-                displayAccountFirst.value
+                displayProfileFirst.value
             }
             SwipeCardNum.SECOND -> {
-                displayAccountSecond.value
+                displayProfileSecond.value
             }
         }
 
@@ -87,13 +89,13 @@ class SwipeViewModel @Inject constructor(private val remoteRepo: RemoteRepositor
         when (_toggle.value) {
 
             SwipeCardNum.FIRST -> {
-                _displayAccountFirst.value = displayAccounts.value?.poll()
+                _displayProfileFirst.value = displayAccounts.value?.poll()
 
                 _toggle.value = SwipeCardNum.SECOND
             }
 
             SwipeCardNum.SECOND -> {
-                _displayAccountSecond.value = displayAccounts.value?.poll()
+                _displayProfileSecond.value = displayAccounts.value?.poll()
 
                 _toggle.value = SwipeCardNum.FIRST
             }

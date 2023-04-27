@@ -2,6 +2,7 @@ package com.mellow.alt.presentation.compose
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -17,7 +18,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.core.animation.addListener
 import coil.compose.rememberAsyncImagePainter
-import com.mellow.alt.data.Profile
 import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
 import com.mellow.alt.utils.SwipeCardNum
 
@@ -37,22 +36,13 @@ fun SwipeCard(
     viewModel: SwipeViewModel,
     cardNum: SwipeCardNum
 ) {
-    val photos: List<String> = listOf(
-        "file:///android_asset/img_temp1.jpg",
-        "file:///android_asset/img_temp2.jpg",
-        "file:///android_asset/img_temp1.jpg",
-        "file:///android_asset/img_temp.jpg",
-        "file:///android_asset/img_temp2.jpg",
-        "file:///android_asset/img_temp.jpg"
-    )
-
     val toggle by viewModel.toggle.observeAsState()
     val displayAccount by when (cardNum) {
         SwipeCardNum.FIRST -> {
-            viewModel.displayAccountFirst.observeAsState()
+            viewModel.displayProfileFirst.observeAsState()
         }
         SwipeCardNum.SECOND -> {
-            viewModel.displayAccountSecond.observeAsState()
+            viewModel.displayProfileSecond.observeAsState()
         }
     }
 
@@ -72,7 +62,7 @@ fun SwipeCard(
 
     val velocityTracker = androidx.compose.ui.input.pointer.util.VelocityTracker()
 
-    var mainImage by remember { mutableStateOf(("file:///android_asset/img_temp.jpg")) }
+    var mainImage by remember { mutableStateOf(displayAccount?.imageList?.first()) }
 
     Card(
         modifier = Modifier
@@ -131,6 +121,7 @@ fun SwipeCard(
                             }
                             return@detectDragGestures
                         }
+
 
                         val currentTranslationX = offsetX
                         val currentTranslationY = offsetY
@@ -209,6 +200,7 @@ fun SwipeCard(
                 modifier = Modifier
                     .padding(24.dp, 16.dp)
                     .requiredHeight(76.dp)
+                    .fillMaxWidth()
                     .clip(RoundedCornerShape(48.dp))
                     .border(1.dp, Color.Gray, shape = RoundedCornerShape(48.dp))
                     .padding(6.dp, 0.dp)
@@ -216,7 +208,7 @@ fun SwipeCard(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
-                items(photos) { item ->
+                items(displayAccount?.imageList ?: listOf()) { item ->
                     Image(
                         painter = rememberAsyncImagePainter(item),
                         contentDescription = null,

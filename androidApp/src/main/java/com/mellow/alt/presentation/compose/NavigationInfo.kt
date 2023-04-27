@@ -22,7 +22,7 @@ fun NavGraphBuilder.buildTabs(
     }
 
     composable(NavigationTabs.PROFILE.route) { from ->
-        Text("Sosi1")
+        Profile(viewModel = viewModel)
     }
 }
 

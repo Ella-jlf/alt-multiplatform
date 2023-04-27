@@ -75,6 +75,7 @@ class NetworkClient {
                     host = baseUrl
                     path(path)
                     port = 4000
+                    body = data
                 }
 
             }
