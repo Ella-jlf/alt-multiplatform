@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mellow.alt.data.Profile
 import com.mellow.alt.data.RemoteRepository
-import com.mellow.alt.utils.SwipeCardNum
+import com.mellow.alt.presentation.compose.swipe.SwipeCardNum
 import kotlinx.coroutines.*
 import java.util.*
 import javax.inject.Inject

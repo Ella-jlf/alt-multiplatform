@@ -1,12 +1,12 @@
-package com.mellow.alt.presentation.compose
+package com.mellow.alt.presentation.compose.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.material.Text
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.mellow.alt.R
+import com.mellow.alt.presentation.compose.*
 import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
 
 fun NavGraphBuilder.buildTabs(

@@ -7,6 +7,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.mellow.alt.presentation.compose.navigation.AltBottomBar
+import com.mellow.alt.presentation.compose.navigation.NavigationTabs
+import com.mellow.alt.presentation.compose.navigation.buildTabs
 import com.mellow.alt.presentation.compose.theme.AltMainTheme
 import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
 

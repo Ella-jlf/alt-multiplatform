@@ -3,7 +3,7 @@ package com.mellow.alt.presentation.compose
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
-import com.mellow.alt.utils.SwipeCardNum
+import com.mellow.alt.presentation.compose.swipe.SwipeCardNum
 
 @Composable
 fun SwipeScreen(viewModel: SwipeViewModel) {

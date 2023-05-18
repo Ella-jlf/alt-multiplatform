@@ -1,4 +1,4 @@
-package com.mellow.alt.presentation.compose
+package com.mellow.alt.presentation.compose.navigation
 
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable

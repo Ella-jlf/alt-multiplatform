@@ -2,7 +2,6 @@ package com.mellow.alt.presentation.compose
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -10,7 +9,6 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -19,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
@@ -29,11 +26,8 @@ import androidx.compose.ui.zIndex
 import androidx.core.animation.addListener
 import coil.compose.rememberAsyncImagePainter
 import com.mellow.alt.presentation.compose.theme.AltAppTheme
-import com.mellow.alt.presentation.compose.theme.LocalAltAppColors
-import com.mellow.alt.presentation.compose.theme.LocalAltAppShapes
-import com.mellow.alt.presentation.compose.theme.LocalAltAppTypography
 import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
-import com.mellow.alt.utils.SwipeCardNum
+import com.mellow.alt.presentation.compose.swipe.SwipeCardNum
 
 @Composable
 fun SwipeCard(

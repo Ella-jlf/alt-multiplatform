@@ -1,23 +1,18 @@
 package com.mellow.alt.presentation.custom
 
-import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Insets
 import android.os.Build
 import android.util.AttributeSet
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import androidx.core.animation.addListener
 import com.mellow.alt.databinding.ViewSwipeBinding
-import com.mellow.alt.presentation.auxililary.dpToPx
 import kotlin.math.abs
-import kotlin.random.Random
 
 class SwipeView @JvmOverloads constructor(
     context: Context,

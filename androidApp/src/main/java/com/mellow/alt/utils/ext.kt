@@ -1,4 +1,4 @@
-package com.mellow.alt.presentation.auxililary
+package com.mellow.alt.utils
 
 import android.content.res.Resources
 import android.util.TypedValue
