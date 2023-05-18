@@ -28,6 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.core.animation.addListener
 import coil.compose.rememberAsyncImagePainter
+import com.mellow.alt.presentation.compose.theme.AltAppTheme
+import com.mellow.alt.presentation.compose.theme.LocalAltAppColors
+import com.mellow.alt.presentation.compose.theme.LocalAltAppShapes
+import com.mellow.alt.presentation.compose.theme.LocalAltAppTypography
 import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
 import com.mellow.alt.utils.SwipeCardNum
 
@@ -174,10 +178,10 @@ fun SwipeCard(
                 )
             },
         elevation = 10.dp,
-        shape = RoundedCornerShape(24.dp),
+        shape = AltAppTheme.shapes.primaryShape,
+        backgroundColor = AltAppTheme.colors.primaryBackground
 
-
-        ) {
+    ) {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -186,8 +190,8 @@ fun SwipeCard(
                 text = displayAccount?.name ?: "Empty",
                 modifier = Modifier
                     .weight(1.5f),
-
-                )
+                style = AltAppTheme.typography.primaryTypography
+            )
             Image(
                 painter = rememberAsyncImagePainter(mainImage),
                 contentDescription = null,
@@ -201,8 +205,12 @@ fun SwipeCard(
                     .padding(24.dp, 16.dp)
                     .requiredHeight(76.dp)
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(48.dp))
-                    .border(1.dp, Color.Gray, shape = RoundedCornerShape(48.dp))
+                    .clip(AltAppTheme.shapes.primarySmallShape)
+                    .border(
+                        1.dp,
+                        AltAppTheme.colors.secondaryBackground,
+                        shape = AltAppTheme.shapes.primarySmallShape
+                    )
                     .padding(6.dp, 0.dp)
                     .weight(1.5f),
                 verticalAlignment = Alignment.CenterVertically,
@@ -214,8 +222,12 @@ fun SwipeCard(
                         contentDescription = null,
                         modifier = Modifier
                             .size(64.dp)
-                            .clip(RoundedCornerShape(48.dp))
-                            .border(1.dp, Color.Gray, RoundedCornerShape(48.dp))
+                            .clip(AltAppTheme.shapes.primarySmallShape)
+                            .border(
+                                1.dp,
+                                AltAppTheme.colors.secondaryBackground,
+                                AltAppTheme.shapes.primarySmallShape
+                            )
                             .clickable {
                                 if (mainImage != item) {
                                     mainImage = item

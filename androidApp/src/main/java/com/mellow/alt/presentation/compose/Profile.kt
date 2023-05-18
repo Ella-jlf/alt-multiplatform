@@ -1,6 +1,5 @@
 package com.mellow.alt.presentation.compose
 
-import android.view.MotionEvent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -11,18 +10,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun Profile(viewModel: SwipeViewModel) {
     val userProfile by viewModel.userProfile.observeAsState()
@@ -38,15 +34,8 @@ fun Profile(viewModel: SwipeViewModel) {
                     .clip(RoundedCornerShape(32.dp, 0.dp, 0.dp, 32.dp))
                     .border(1.dp, Color.Gray, RoundedCornerShape(32.dp, 0.dp, 0.dp, 32.dp))
                     .height(if (num == size.first) size.second else 64.dp)
-                    .pointerInteropFilter {
-                        when (it.action) {
-                            MotionEvent.ACTION_DOWN -> {
-                                size = Pair(num, 128.dp)
-
-                                return@pointerInteropFilter true
-                            }
-                            else -> return@pointerInteropFilter false
-                        }
+                    .clickable {
+                        size = Pair(num, 128.dp)
                     }
             ) {
 
@@ -59,7 +48,11 @@ fun Profile(viewModel: SwipeViewModel) {
                     modifier = Modifier
                         .padding(12.dp)
                         .clip(RoundedCornerShape(if (num == size.first) size.second.minus(8.dp) else 56.dp))
-                        .border(1.dp, Color.Gray, RoundedCornerShape(if (num == size.first) size.second.minus(8.dp) else 56.dp))
+                        .border(
+                            1.dp,
+                            Color.Gray,
+                            RoundedCornerShape(if (num == size.first) size.second.minus(8.dp) else 56.dp)
+                        )
                         .size(if (num == size.first) size.second.minus(8.dp) else 56.dp)
                         .clickable {
                         }

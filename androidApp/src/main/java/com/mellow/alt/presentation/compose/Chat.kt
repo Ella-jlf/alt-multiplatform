@@ -26,7 +26,7 @@ import com.mellow.alt.R
 import com.mellow.alt.presentation.screen.navigation.SwipeViewModel
 
 @Composable
-fun Chat(personChat: Any, viewModel: SwipeViewModel) {
+fun Chat(viewModel: SwipeViewModel) {
     var message by rememberSaveable { mutableStateOf("Text") }
     Scaffold(
         topBar = {

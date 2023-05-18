@@ -30,6 +30,7 @@ class SwipeActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+
             AltApp(viewModel = viewModel)
         }
 
